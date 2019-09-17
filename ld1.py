@@ -78,14 +78,17 @@ while e_total != 0:
         e[i] = d[i] - y
         i = i + 1
     #to make every e value abs
-    while q < len(e):
-        e[q] = abs(e[q])
+    #while q < len(e):
+       # e[q] = abs(e[q])
        # print(e[q])
-        q = q + 1
-        if q == len(e):
-            q = 0
-            break
+        #q = q + 1
+        #if q == len(e):
+         #   q = 0
+         #   break
     e_total = sum(e)
-    print(e_total)
-
-print("It took only ", calculations ," calculations of learning algorithm for no errors to be found.")
+    #print(e_total)
+    if calculations > 1000:
+        print("Learning algorithm couldn't find correct answer in 1000 calculations. e_total last value was: ",e_total)
+        break
+if calculations != 1001:
+    print("It took", calculations ,"calculations of learning algorithm for no errors to be found.")
