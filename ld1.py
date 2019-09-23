@@ -21,9 +21,9 @@ while end == 1:
     stri = stri.split(",")
     numb_array = numpy.asarray(stri) #converting to numerical array
     numb_array = numb_array.astype(numpy.float32)#converting everything to float so it works
-    w1 = random.uniform(0,1)  #random in range of 0 to 1 (can be double)
-    w2 = random.uniform(0,1)
-    b = random.uniform(0,1)
+    w1 = random.uniform(-1,1)  #random in range of -1 to 1 (can be double)
+    w2 = random.uniform(-1,1)
+    b = random.uniform(-1,1)
     eta = 0.5 # starting eta value
 
     i = 0
@@ -99,12 +99,13 @@ while end == 1:
         file_pointer.write("%d\n" % (e_total))
         #print(e_total)
         if calculations > 3000:
-            print("Learning algorithm couldn't find correct answer in 3000 calculations. e_total last value was: ",e_total)
+            print("Learning algorithm couldn't find correct answer in 1500 calculations. e_total last value was: ",e_total)
             file_pointer.close()
             break
     if calculations != 3001:
         print("It took", calculations ,"calculations of learning algorithm for no errors to be found.")
         executions = executions + 1
+        file_pointer.write("Amount of calculations it took during this cycle %d\n" % (calculations))
     elif calculations > 3000:
         print("Amount of executions is equal to",executions)
         break
