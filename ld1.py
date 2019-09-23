@@ -18,9 +18,9 @@ stri = stri.split(",")
 numb_array = numpy.asarray(stri) #converting to numerical array
 numb_array = numb_array.astype(numpy.float32)#converting everything to float so it works
 #print(numb_array) #debug
-w1 = random.uniform(0,1)  #random in range of -1 to 1 (can be double)
-w2 = random.uniform(0,1)
-b = random.uniform(0,1)
+w1 = random.uniform(-1,1)  #random in range of 0 to 1 (can be double)
+w2 = random.uniform(-1,1)
+b = random.uniform(-1,1)
 eta = 0.01 # starting eta value
 
 i = 0
@@ -46,10 +46,11 @@ e_total = 0
 i = 0
 q = 0
 #Calculating the total error
-while i < len(e):
-	 e_total = numpy.abs(e_total) + numpy.abs(e[i])
-	 i = i + 1
-
+#while i < len(e):
+	 #e_total = numpy.abs(e_total) + numpy.abs(e[i])
+	 #i = i + 1
+e_total = sum(e)
+print(e_total) #initial value of e_total
 calculations = 0
 #perceptron training algorithm
 while e_total != 0:
@@ -57,17 +58,19 @@ while e_total != 0:
     i = 0
     w1 = w1 + eta*e_total*x1[i]
     w2 = w2 + eta*e_total*x2[i]
-    b = b + eta * e[i]
+    b = b + eta * e_total
     ans = w1*x1[i]+w2*x2[i]+b
-    ans = round(ans,2)
+    ans = round(ans,2) #calculating current output
     if ans > 0:
         y = 1
     else:
         y = -1
-    e[i] = d[i] - y
+    e[i] = d[i] - y #current error
+    #parameter update
     w1 = w1 + eta*e[i]*x1[i]
     w2 = w2 + eta*e[i]*x2[i]
     b = b + eta * e[i]
+    #now we test the updated w1, w2 and b
     while i < len(x1):
         ans = w1*x1[i]+w2*x2[i]+b
         ans = round(ans,2)
@@ -77,14 +80,15 @@ while e_total != 0:
             y = -1
         e[i] = d[i] - y
         i = i + 1
+    #print("This first") #debug
     #to make every e value abs
     #while q < len(e):
-       # e[q] = abs(e[q])
-       # print(e[q])
+        #e[q] = abs(e[q])
         #q = q + 1
+        #print("This second") #debug
         #if q == len(e):
-         #   q = 0
-         #   break
+            #q = 0
+            #break
     e_total = sum(e)
     #print(e_total)
     if calculations > 1000:
