@@ -45,30 +45,34 @@ while i < len(x1):
 e_total = 0
 i = 0
 q = 0
+r = 0
 #Calculating the total error
 #while i < len(e):
 	 #e_total = numpy.abs(e_total) + numpy.abs(e[i])
 	 #i = i + 1
 e_total = sum(e)
-print(e_total) #initial value of e_total
+#print(e_total) #initial value of e_total
 calculations = 0
 #perceptron training algorithm
 while e_total != 0:
+    if q == len(x1): #each execution uses new x1 and x2 values, so after limit we reset to 0
+        q = 0
+    print(e_total)
     calculations = calculations + 1
     i = 0
-    w1 = w1 + eta*e_total*x1[i]
-    w2 = w2 + eta*e_total*x2[i]
+    w1 = w1 + eta*e_total*x1[q]
+    w2 = w2 + eta*e_total*x2[q]
     b = b + eta * e_total
-    ans = w1*x1[i]+w2*x2[i]+b
+    ans = w1*x1[q]+w2*x2[q]+b
     ans = round(ans,2) #calculating current output
     if ans > 0:
         y = 1
     else:
         y = -1
-    e[i] = d[i] - y #current error
+    e[i] = d[q] - y #current error
     #parameter update
-    w1 = w1 + eta*e[i]*x1[i]
-    w2 = w2 + eta*e[i]*x2[i]
+    w1 = w1 + eta*e[i]*x1[q]
+    w2 = w2 + eta*e[i]*x2[q]
     b = b + eta * e[i]
     #now we test the updated w1, w2 and b
     while i < len(x1):
@@ -90,6 +94,7 @@ while e_total != 0:
             #q = 0
             #break
     e_total = sum(e)
+    q = q + 1
     #print(e_total)
     if calculations > 1000:
         print("Learning algorithm couldn't find correct answer in 1000 calculations. e_total last value was: ",e_total)
