@@ -65,17 +65,6 @@ while end == 1:
         w1 = w1 + eta*e_total*x1[q]
         w2 = w2 + eta*e_total*x2[q]
         b = b + eta * e_total
-        ans = w1*x1[q]+w2*x2[q]+b
-        ans = round(ans,2) #calculating current output
-        if ans > 0:
-            y = 1
-        else:
-            y = -1
-        e[i] = d[q] - y #current error
-        #parameter update
-        w1 = w1 + eta*e[q]*x1[q]
-        w2 = w2 + eta*e[q]*x2[q]
-        b = b + eta * e[q]
         #now we test the updated w1, w2 and b
         while i < len(x1):
             ans = w1*x1[i]+w2*x2[i]+b
